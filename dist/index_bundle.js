@@ -51,23 +51,67 @@
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
+	var USER_DATA = {
+	    name: 'Ruyss Brown',
+	    username: 'TheRusstler',
+	    image: 'https://avatars0.githubusercontent.com/u/2933430?v=3&s=460'
+	};
+
 	var React = __webpack_require__(2);
 
 	var ReactDOM = __webpack_require__(33);
 
-	var HelloWorld = React.createClass({
-	    displayName: 'HelloWorld',
+	var ProfilePic = React.createClass({
+	    displayName: 'ProfilePic',
+
+	    render: function () {
+	        return React.createElement('img', { src: this.props.imageUrl, style: { height: 100, width: 100 } });
+	    }
+	});
+
+	var ProfileLink = React.createClass({
+	    displayName: 'ProfileLink',
 
 	    render: function () {
 	        return React.createElement(
 	            'div',
 	            null,
-	            'Hello World!'
+	            React.createElement(
+	                'a',
+	                { href: 'https://www.github.com/' + this.props.username },
+	                this.props.username
+	            )
 	        );
 	    }
 	});
 
-	ReactDOM.render(React.createElement(HelloWorld, null), document.getElementById('app'));
+	var ProfileName = React.createClass({
+	    displayName: 'ProfileName',
+
+	    render: function () {
+	        return React.createElement(
+	            'div',
+	            null,
+	            this.props.name
+	        );
+	    }
+	});
+
+	var Avatar = React.createClass({
+	    displayName: 'Avatar',
+
+	    render: function () {
+	        return React.createElement(
+	            'div',
+	            null,
+	            React.createElement(ProfilePic, { imageUrl: this.props.user.image }),
+	            React.createElement(ProfileName, { name: this.props.user.name }),
+	            React.createElement(ProfileLink, { username: this.props.user.username })
+	        );
+	    }
+	});
+
+	ReactDOM.render(React.createElement(Avatar, { user: USER_DATA }), document.getElementById('app'));
 
 /***/ },
 /* 2 */
